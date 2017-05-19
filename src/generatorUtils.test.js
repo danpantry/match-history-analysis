@@ -25,7 +25,7 @@ test('collect() collects a generator into an array when the generator is a gener
 test('map() converts source values into resultant values', () => {
   const sourceArray = [1, 2, 3];
   const resultArray = [];
-  
+
   for (let element of generatorUtils.map(sourceArray, (x) => x * 2)) {
     resultArray.push(element);
   }
@@ -36,7 +36,7 @@ test('map() converts source values into resultant values', () => {
 test('take() discards elements past the maximum', () => {
   const sourceArray = [1, 2, 3];
   const resultArray = [];
-  
+
   for (let element of generatorUtils.take(sourceArray, 2)) {
     resultArray.push(element);
   }
@@ -49,4 +49,15 @@ test('can chain map() and collect()', () => {
   const resultArray = generatorUtils.collect(generatorUtils.map([1, 2, 3], x => x * 2));
 
   expect(resultArray).toEqual([2, 4, 6]);
+});
+
+test('skip() discards the given number of elements and returns the rest of the array', () => {
+  const sourceArray = [1, 2, 3];
+  const resultArray = [];
+
+  for (let element of generatorUtils.skip(sourceArray, 1)) {
+    resultArray.push(element);
+  }
+
+  expect(resultArray).toEqual([2, 3]);
 });

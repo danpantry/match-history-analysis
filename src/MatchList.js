@@ -1,8 +1,20 @@
 import React from 'react';
-import { collect, map, take } from './generatorUtils';
+import { collect, map, take, skip } from './generatorUtils';
 
-export default function MatchList({ matches, perPage = matches.length, onMatchClicked }) {
-  const components = collect(map(take(matches, perPage), mapMatchToEntry));
+/**
+ * Creates a new pageable match list
+ *
+ * Props:
+ *
+ * - matches: A list of matches to render.
+ * - perPage: The maximum number of matches to render per page. Defaults to showing all matches.
+ * - onMatchClicked: A callback that is invoked once a match list entry is clicked.
+ * - initialPage: The page to render initially. Defaults to the first page. This is not zero-indexed.
+ */
+export default function MatchList({ matches, perPage = matches.length, onMatchClicked, initialPage = 1 }) {
+  const elementsToSkip = (initialPage - 1) * perPage;
+  const matchesToRender = take(skip(matches, elementsToSkip), perPage);
+  const components = collect(map(matchesToRender, mapMatchToEntry));
 
   return <ol>
     {components}
@@ -19,6 +31,6 @@ export default function MatchList({ matches, perPage = matches.length, onMatchCl
   }
 }
 
-function MatchListEntry() {
+export function MatchListEntry() {
   return null;
 }

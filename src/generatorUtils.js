@@ -1,17 +1,21 @@
 // Generator functions so we don't create loads of copies of the same array
 // Not really necessary, but it's fun
-export function* take(array, maximum) { 
-  for (let i = 0; i < maximum; i++) {
-    if (i > array.length) {
+// Note that we can never use a property from an array since all of these functions *should* be chainable and thus work over *any* iterable.
+export function* take(iterable, maximum) {
+  let i = 0;
+
+  for (let element of iterable) {
+    if (i >= maximum) {
       return;
     }
-    
-    yield array[i];
+
+    yield element;
+    i = i + 1;
   }
 }
 
-export function* map(array, functor) {
-  for (let element of array) {
+export function* map(iterable, functor) {
+  for (let element of iterable) {
     yield functor(element);
   }
 }
@@ -27,4 +31,17 @@ export function collect(generatorOrGeneratorFactory) {
   }
 
   return elements;
+}
+
+export function* skip(iterable, number) {
+  let i = 0;
+
+  for (let element of iterable) {
+    i = i + 1;
+    if (i <= number) {
+      continue;
+    }
+
+    yield element;
+  }
 }

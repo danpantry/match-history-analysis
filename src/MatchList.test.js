@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MatchList from './MatchList';
-import {shallow} from 'enzyme';
+import MatchList, {MatchListEntry} from './MatchList';
+import {shallow, mount} from 'enzyme';
 import uuid from 'uuid';
 
 function matchFactory() {
@@ -53,4 +53,27 @@ it('should execute the onMatchClicked callback when a match is clicked', () => {
   function onMatchClicked() {
     clickCount = clickCount + 1;
   }
+});
+
+// I don't like how this test "knows" about the <li>.
+it('should display the first element on the first page', () => {
+  const matches = matchesFactory(2);
+  const component = shallow(<MatchList matches={matches} perPage={1} />);
+
+  const firstMatch = matches[0];
+  const li = component.childAt(0).get(0);
+  expect(li).toEqual(<li key={firstMatch.id}>
+    <MatchListEntry match={firstMatch} />
+  </li>);
+});
+
+it('should display the second element on the second page', () => {
+  const matches = matchesFactory(2);
+  const component = shallow(<MatchList matches={matches} perPage={1} initialPage={2} />);
+
+  const secondMatch = matches[1];
+  const li = component.childAt(0).get(0);
+  expect(li).toEqual(<li key={secondMatch.id}>
+    <MatchListEntry match={secondMatch} />
+  </li>);
 });
