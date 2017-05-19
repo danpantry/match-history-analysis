@@ -1,4 +1,4 @@
-import * as utils from './iterableUtils';
+import * as utils from '../iterableUtils';
 
 test('collect() collects a generator into an array', () => {
   const sourceArray = [1, 2, 3];

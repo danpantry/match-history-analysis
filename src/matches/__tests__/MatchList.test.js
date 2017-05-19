@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MatchList from './MatchList';
-import MatchListPage from './MatchListPage';
-import Pager from '../Pager';
+import MatchList from '../MatchList';
+import MatchListPage from '../MatchListPage';
+import Pager from '../../Pager';
 import { shallow, mount } from 'enzyme';
-import { matchesFactory } from './factories';
+import { matchesFactory } from '../factories';
 
 it('should render all matches if no perPage parameter is set', () => {
   const matches = matchesFactory(1);

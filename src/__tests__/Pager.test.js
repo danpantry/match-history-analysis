@@ -1,5 +1,5 @@
 import React from 'react';
-import Pager, {NextPageButton} from './Pager';
+import Pager, {NextPageButton} from '../Pager';
 import {shallow, mount} from 'enzyme';
 
 it('should show Next button as disabled when there are no more pages', () => {

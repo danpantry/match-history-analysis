@@ -1,8 +1,8 @@
 import React from 'react';
-import MatchListRouteHandler from './MatchListRouteHandler';
+import MatchListRouteHandler from '../MatchListRouteHandler';
 import { shallow } from 'enzyme';
-import MatchListPage from './MatchListPage';
-import { matchesFactory } from './factories';
+import MatchListPage from '../MatchListPage';
+import { matchesFactory } from '../factories';
 
 it('renders the MatchListPage component when matches are provided', () => {
   const matches = matchesFactory(10);
