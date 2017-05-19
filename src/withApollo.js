@@ -6,9 +6,19 @@ import {
   ApolloClient
 } from 'react-apollo';
 
+const useMocks = process.env.NODE_ENV === 'development';
+
 export default function withApollo(component) {
-  const client = new ApolloClient();
-  return <ApolloProvider client={client}>
+  if (useMocks) {
+    console.info('[apollo]', 'using mocks');
+    const { MockedProvider } = require('react-apollo/lib/test-utils');
+    const mocks = require('./mocks').default;
+    return <MockedProvider mocks={mocks}>
+      {component}
+    </MockedProvider>;
+  }
+
+  return <ApolloProvider client={new ApolloClient()}>
     {component}
   </ApolloProvider>;
 };
