@@ -1,5 +1,7 @@
 import React from 'react';
-import { collect, map, take, skip } from './generatorUtils';
+import { collect, take, skip } from './generatorUtils';
+import MatchListPage from './MatchListPage';
+import Pager from './Pager';
 
 /**
  * Creates a new pageable match list
@@ -12,25 +14,12 @@ import { collect, map, take, skip } from './generatorUtils';
  * - initialPage: The page to render initially. Defaults to the first page. This is not zero-indexed.
  */
 export default function MatchList({ matches, perPage = matches.length, onMatchClicked, initialPage = 1 }) {
+  const numberOfPages = matches.length / perPage;
   const elementsToSkip = (initialPage - 1) * perPage;
-  const matchesToRender = take(skip(matches, elementsToSkip), perPage);
-  const components = collect(map(matchesToRender, mapMatchToEntry));
+  const matchesToRender = collect(take(skip(matches, elementsToSkip), perPage));
 
-  return <ol>
-    {components}
-  </ol>;
-
-  function mapMatchToEntry(match) {
-    if (match.gameId === undefined) {
-      throw new TypeError("Each match must have an id that is defined");
-    }
-
-    return <li key={match.gameId} onClick={onMatchClicked}>
-      <MatchListEntry match={match} />
-    </li>;
-  }
-}
-
-export function MatchListEntry() {
-  return null;
+  return <div>
+    <MatchListPage matches={matchesToRender} />
+    <Pager pages={numberOfPages} currentPage={initialPage} />
+  </div>;
 }
