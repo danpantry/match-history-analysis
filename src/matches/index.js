@@ -1,1 +1,1 @@
-export { default } from './MatchListRouteHandler';
+export { default } from './MatchListRouteHandlerContainer';
