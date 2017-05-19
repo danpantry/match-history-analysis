@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import MatchListRouteHandler from './matches';
+import withApollo from './withApollo';
 
 export function App() {
-  return <BrowserRouter>
+  return withApollo(<BrowserRouter>
     <MatchListRouteHandler />
-  </BrowserRouter>;
+  </BrowserRouter>);
 }
 
 export default App;
