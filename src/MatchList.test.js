@@ -40,3 +40,17 @@ it('should throw an error if passed a match without a valid ID', () => {
     shallow(<MatchList matches={matches} />);
   }).toThrow("Each match must have an id that is defined");
 });
+
+it('should execute the onMatchClicked callback when a match is clicked', () => {
+  const matches = matchesFactory(1);
+  let clickCount = 0;
+  const component = shallow(<MatchList matches={matches} onMatchClicked={onMatchClicked} />);
+  const firstChild = component.children().first();
+  firstChild.simulate('click');
+
+  expect(clickCount).toBe(1);
+
+  function onMatchClicked() {
+    clickCount = clickCount + 1;
+  }
+});
