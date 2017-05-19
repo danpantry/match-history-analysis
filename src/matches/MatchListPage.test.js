@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import MatchListPage, {MatchListEntry} from './MatchListPage';
+import MatchListPage from './MatchListPage';
 import { matchesFactory } from './factories';
 
 it('should execute the onMatchClicked callback when a match is clicked', () => {

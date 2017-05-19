@@ -1,5 +1,6 @@
 import React from 'react';
 import { collect, map } from '../iterableUtils';
+import MatchListEntry from './MatchListEntry';
 
 /**
  * A single page of matches in a Match List.
@@ -18,12 +19,4 @@ export default function MatchListPage({ matches, onMatchClicked }) {
 
     return <MatchListEntry key={match.gameId} onClick={onMatchClicked} />;
   }
-}
-
-/**
- * A single entry in a match list page.
- */
-export function MatchListEntry({ onClick }) {
-  return <li onClick={onClick}>
-  </li>;
 }
