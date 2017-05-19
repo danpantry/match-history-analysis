@@ -58,3 +58,26 @@ it('should display the second element on the second page', () => {
   const page = component.children(MatchListPage);
   expect(page.prop('matches')).toEqual([ secondMatch ]);
 });
+
+/// The following are technically integration tests.
+it('should display the next page when I click the Next button', () => {
+  const matches = matchesFactory(2);
+  const component = mount(<MatchList matches={matches} perPage={1} />);
+  const nextButton = component.find('button');
+  nextButton.simulate('click');
+  expect(component.state('page')).toBe(2);
+});
+
+it('should show the Next button as being enabled when there are more pages', () => {
+  const matches = matchesFactory(2);
+  const component = mount(<MatchList matches={matches} perPage={1} />);
+  const nextButton = component.find('button');
+  expect(nextButton.prop('disabled')).toBe(false);
+});
+
+it('should show the Next button as being disabled when there are no more pages', () => {
+  const matches = matchesFactory(1);
+  const component = mount(<MatchList matches={matches} perPage={1} />);
+  const nextButton = component.find('button');
+  expect(nextButton.prop('disabled')).toBe(true);
+});

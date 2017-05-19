@@ -13,13 +13,38 @@ import Pager from './Pager';
  * - onMatchClicked: A callback that is invoked once a match list entry is clicked.
  * - initialPage: The page to render initially. Defaults to the first page. This is not zero-indexed.
  */
-export default function MatchList({ matches, perPage = matches.length, onMatchClicked, initialPage = 1 }) {
-  const numberOfPages = Math.ceil(matches.length / perPage);
-  const elementsToSkip = (initialPage - 1) * perPage;
-  const matchesToRender = collect(take(skip(matches, elementsToSkip), perPage));
+export default class MatchList extends React.Component {
+  static defaultProps = {
+    initialPage: 1
+  };
 
-  return <div>
-    <MatchListPage matches={matchesToRender} />
-    <Pager pages={numberOfPages} currentPage={initialPage} />
-  </div>;
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: props.initialPage
+    };
+    this.handleNextPage = this.onNextPageButtonClicked.bind(this);
+  }
+
+  render() {
+    const { matches, perPage = matches.length, onMatchClicked } = this.props;
+    const { page } = this.state;
+    const numberOfPages = Math.ceil(matches.length / perPage);
+    const elementsToSkip = (page - 1) * perPage;
+    const matchesToRender = collect(take(skip(matches, elementsToSkip), perPage));
+
+
+    return <div>
+      <MatchListPage matches={matchesToRender} />
+      <Pager pages={numberOfPages}
+        currentPage={page}
+        onNext={this.handleNextPage} />
+    </div>;
+  }
+
+  onNextPageButtonClicked() {
+    this.setState({
+      page: this.state.page + 1
+    });
+  }
 }
