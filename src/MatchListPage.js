@@ -16,15 +16,14 @@ export default function MatchListPage({ matches, onMatchClicked }) {
       throw new TypeError("Each match must have an id that is defined");
     }
 
-    return <li key={match.gameId} onClick={onMatchClicked}>
-      <MatchListEntry match={match} />
-    </li>;
+    return <MatchListEntry key={match.gameId} onClick={onMatchClicked} />;
   }
 }
 
 /**
  * A single entry in a match list page.
  */
-export function MatchListEntry() {
-  return null;
+export function MatchListEntry({ onClick }) {
+  return <li onClick={onClick}>
+  </li>;
 }
