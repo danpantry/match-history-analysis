@@ -1,5 +1,5 @@
 import React from 'react';
-import { collect, map } from './generatorUtils';
+import { collect, map } from './iterableUtils';
 
 /**
  * A single page of matches in a Match List.

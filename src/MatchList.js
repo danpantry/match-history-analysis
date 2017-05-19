@@ -1,5 +1,5 @@
 import React from 'react';
-import { collect, take, skip } from './generatorUtils';
+import { collect, take, skip } from './iterableUtils';
 import MatchListPage from './MatchListPage';
 import Pager from './Pager';
 
