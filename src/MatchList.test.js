@@ -59,6 +59,20 @@ it('should display the second element on the second page', () => {
   expect(page.prop('matches')).toEqual([ secondMatch ]);
 });
 
+it('should trigger the callback when a match is selected', () => {
+  let wasCalled = false;
+  const component = shallow(<MatchList matches={matchesFactory(1)} perPage={1} initialPage={2} onMatchClicked={onMatchClicked} />);
+  const page = component.children(MatchListPage);
+  const cb = page.prop('onMatchClicked');
+  expect(typeof cb).toEqual('function');
+  cb();
+  expect(wasCalled).toEqual(true);
+
+  function onMatchClicked() {
+    wasCalled = true;
+  }
+});
+
 /// The following are technically integration tests.
 it('should display the next page when I click the Next button', () => {
   const matches = matchesFactory(2);

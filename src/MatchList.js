@@ -33,9 +33,8 @@ export default class MatchList extends React.Component {
     const elementsToSkip = (page - 1) * perPage;
     const matchesToRender = collect(take(skip(matches, elementsToSkip), perPage));
 
-
     return <div>
-      <MatchListPage matches={matchesToRender} />
+      <MatchListPage matches={matchesToRender} onMatchClicked={onMatchClicked} />
       <Pager pages={numberOfPages}
         currentPage={page}
         onNext={this.handleNextPage} />
