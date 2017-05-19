@@ -2,11 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MatchList, {MatchListEntry} from './MatchList';
 import {shallow, mount} from 'enzyme';
-import uuid from 'uuid';
 
 function matchFactory() {
   return {
-    id: uuid()
+    gameId: Math.round(Math.random() * 100000)
   };
 }
 
@@ -33,7 +32,7 @@ it('should render, at maximum, the number of matches specified in perPage at one
 
 it('should throw an error if passed a match without a valid ID', () => {
   const matches = [
-    { id: undefined }
+    { gameId: undefined }
   ];
 
   expect(() => {
@@ -55,16 +54,24 @@ it('should execute the onMatchClicked callback when a match is clicked', () => {
   }
 });
 
-// I don't like how this test "knows" about the <li>.
+// I don't like how the following tests know about the <li> used.
+it('should set the key of the entries to the gameId of each match', () => {
+  const matches = matchesFactory(1);
+  const component = shallow(<MatchList matches={matches} />);
+  const firstMatch = matches[0];
+  const li = component.childAt(0);
+
+  // Keys are string values
+  expect(li.key()).toEqual(firstMatch.gameId.toString());
+});
+
 it('should display the first element on the first page', () => {
   const matches = matchesFactory(2);
   const component = shallow(<MatchList matches={matches} perPage={1} />);
 
   const firstMatch = matches[0];
-  const li = component.childAt(0).get(0);
-  expect(li).toEqual(<li key={firstMatch.id}>
-    <MatchListEntry match={firstMatch} />
-  </li>);
+  const entry = component.childAt(0).childAt(0).get(0);
+  expect(entry).toEqual(<MatchListEntry match={firstMatch} />);
 });
 
 it('should display the second element on the second page', () => {
@@ -72,8 +79,6 @@ it('should display the second element on the second page', () => {
   const component = shallow(<MatchList matches={matches} perPage={1} initialPage={2} />);
 
   const secondMatch = matches[1];
-  const li = component.childAt(0).get(0);
-  expect(li).toEqual(<li key={secondMatch.id}>
-    <MatchListEntry match={secondMatch} />
-  </li>);
+  const entry = component.childAt(0).childAt(0).get(0);
+  expect(entry).toEqual(<MatchListEntry match={secondMatch} />);
 });

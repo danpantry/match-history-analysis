@@ -21,11 +21,11 @@ export default function MatchList({ matches, perPage = matches.length, onMatchCl
   </ol>;
 
   function mapMatchToEntry(match) {
-    if (match.id === undefined) {
+    if (match.gameId === undefined) {
       throw new TypeError("Each match must have an id that is defined");
     }
 
-    return <li key={match.id} onClick={onMatchClicked}>
+    return <li key={match.gameId} onClick={onMatchClicked}>
       <MatchListEntry match={match} />
     </li>;
   }
