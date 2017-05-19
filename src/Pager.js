@@ -6,5 +6,5 @@ export default function Pager({ pages, currentPage, onNext }) {
 }
 
 export function NextPageButton({ onClick, disabled }) {
-  return <button onClick={onClick} disabled={disabled} />
+  return <button onClick={onClick} disabled={disabled}>Next</button>;
 }
