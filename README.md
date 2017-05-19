@@ -1,3 +1,8 @@
+# Match History Analysis
+[![Build Status](https://travis-ci.org/danpantry/match-history-analysis.svg?branch=master)](https://travis-ci.org/danpantry/match-history-analysis)
+
+----
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
