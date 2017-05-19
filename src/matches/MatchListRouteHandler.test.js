@@ -17,3 +17,9 @@ it('should show a Loading message when data is loading', () => {
   expect(component.text()).toBe('Loading...');
 });
 
+
+it('should show an Error message when data failed to fetch', () => {
+  const component = shallow(<MatchListRouteHandler data={{ error: new Error('crap') }} />);
+
+  expect(component.text()).toBe('Error!');
+});
