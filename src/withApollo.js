@@ -6,7 +6,7 @@ import {
   ApolloClient
 } from 'react-apollo';
 
-const useMocks = process.env.NODE_ENV === 'development';
+const useMocks = process.env.NODE_ENV === 'development' || 'test';
 
 export default function withApollo(component) {
   if (useMocks) {
