@@ -35,6 +35,14 @@ it('should render a pager with the correct `currentPage` prop', () => {
   expect(pager.prop('currentPage')).toBe(1);
 });
 
+it('should correctly round up the number of pages if there are matches remaining after dividing matches by `perPage` prop', () => {
+  // in other words, if we have 7 matches and we only want 5 per page, we should still display two pages in the Pager.
+  const matches = matchesFactory(7);
+  const component = shallow(<MatchList matches={matches} perPage={5} />);
+  const pager = component.find(Pager);
+  expect(pager.prop('pages')).toBe(2);
+});
+
 it('should display the first element on the first page', () => {
   const matches = matchesFactory(2);
   const component = shallow(<MatchList matches={matches} perPage={1} />);

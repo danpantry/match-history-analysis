@@ -14,7 +14,7 @@ import Pager from './Pager';
  * - initialPage: The page to render initially. Defaults to the first page. This is not zero-indexed.
  */
 export default function MatchList({ matches, perPage = matches.length, onMatchClicked, initialPage = 1 }) {
-  const numberOfPages = matches.length / perPage;
+  const numberOfPages = Math.ceil(matches.length / perPage);
   const elementsToSkip = (initialPage - 1) * perPage;
   const matchesToRender = collect(take(skip(matches, elementsToSkip), perPage));
 
