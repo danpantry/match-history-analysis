@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MatchList from './MatchList';
 import MatchListPage from './MatchListPage';
-import Pager from './Pager';
+import Pager from '../Pager';
 import { shallow, mount } from 'enzyme';
 import { matchesFactory } from './factories';
 

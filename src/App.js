@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import MatchListRouteHandler from './MatchListRouteHandler';
+import MatchListRouteHandler from './matches';
 
 export function App() {
   return <BrowserRouter>

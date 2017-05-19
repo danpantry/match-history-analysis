@@ -1,7 +1,7 @@
 import React from 'react';
-import { collect, take, skip } from './iterableUtils';
+import { collect, take, skip } from '../iterableUtils';
 import MatchListPage from './MatchListPage';
-import Pager from './Pager';
+import Pager from '../Pager';
 
 /**
  * Creates a new pageable match list
